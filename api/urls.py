@@ -8,6 +8,6 @@ router.register(r'educations', EducationViewSet)
 router.register(r'trainings', TrainingViewSet)
 router.register(r'work-experiences', WorkExperienceViewSet)
 
-ีurlpatterns = [
+urlpatterns = [
     path('', include(router.urls)),
 ]

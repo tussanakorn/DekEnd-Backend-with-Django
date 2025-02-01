@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'drf_yasg',
-    'api'
+    'api',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,13 +120,43 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# ตั้งค่าการอนุญาต CORS
+# อนุญาตทุกโดเมนให้เข้าถึง (เปิด CORS ทั้งหมด)
+CORS_ALLOW_ALL_ORIGINS = True
+
+# อนุญาตเฉพาะโดเมนที่ระบุให้เข้าถึง
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+# ]
+
+# ถ้าต้องการกำหนด HTTP Methods ที่อนุญาต เช่น GET, POST, PUT, PATCH, DELETE
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
+
+# ถ้าต้องการกำหนด Headers ที่อนุญาต เช่น Authorization, Content-Type
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
