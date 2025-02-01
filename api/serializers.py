@@ -1,4 +1,8 @@
-from rest_framework import serializers
+from rest_framework import serializers, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.models import User
 from .models import Intern, Education, Training, WorkExperience
 
 class InternSerializer(serializers.ModelSerializer):
