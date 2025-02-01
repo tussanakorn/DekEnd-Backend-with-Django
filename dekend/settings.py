@@ -48,6 +48,27 @@ INSTALLED_APPS = [
     'api',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), # ระยะเวลาของ Access Token คือ 1 ชั่วโมง
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1), # ระยะเวลาของ Refresh Token คือ 1 วัน
+    'ROTATE_REFRESH_TOKENS': True, # หมุนเวลา Refresh Token
+    'BLACKLIST_AFTER_ROTATION': True,  # เปิดใช้งานการตรวจสอบ blacklist
+    'ALGORITHM': 'HS256', # อัลกอริธึมสำหรับการเข้ารหัส
+    'SIGNING_KEY': SECRET_KEY, # คีย์สำหรับการเข้ารหัส    
+    'AUTH_HEADER_TYPES': ('Bearer',), # ประเภทของส่วนหัวสำหรับการอนุญาต
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',), # คลาสของสิทธิ์การเข้าสู่ระบบ
+    'UPDATE_LAST_LOGIN': True,  # อัพเดทเวลาการเข้าสู่ระบบครั้งสุดท้าย
+}
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
