@@ -23,3 +23,15 @@ class Intern(models.Model):
 
     class Meta:
         db_table = 'interns'
+
+class Training(models.Model):
+    user = models.ForeignKey(Intern, on_delete=models.CASCADE)
+    topic = models.CharField(max_length=100)
+    details = models.TextField(blank=True)
+    trainer = models.CharField(max_length=100, blank=True)
+    training_date = models.DateField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'trainings'
