@@ -40,3 +40,26 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.profile.tel = validated_data.get('tel', '')
         user.profile.save()
         return user
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()  # รับค่า refresh token
+
+class LogoutView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = LogoutSerializer
+
+    def get_serializer(self, *args, **kwargs):
+        if getattr(self, 'swagger_fake_view', False):  # ตรวจสอบว่าเป็น Swagger หรือไม่
+            return None
+        return super().get_serializer(*args, **kwargs)
+
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        try:
+            refresh_token = serializer.validated_data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=204)
+        except Exception:
+            return Response(status=400)
