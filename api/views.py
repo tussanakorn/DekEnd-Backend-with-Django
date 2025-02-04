@@ -13,11 +13,12 @@ from drf_yasg import openapi
 class InternViewSet(viewsets.ModelViewSet):
     queryset = Intern.objects.all()
     serializer_class = InternSerializer
+    permission_classes = (permissions.AllowAny,) # endpoint นี้ไม่ต้องการการอนุญาตในการเข้าถึง (authenticate)
     
 class EducationViewSet(viewsets.ModelViewSet):
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
-    
+    permission_classes = (permissions.IsAuthenticated) # endpoint นี้ต้องการการอนุญาตในการเข้าถึง (authenticate)
 class TrainingViewSet(viewsets.ModelViewSet):
     queryset = Training.objects.all()
     serializer_class = TrainingSerializer
