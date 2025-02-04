@@ -201,3 +201,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # กำหนดชื่อตารางสำหรับการตรวจสอบสิทธิ์
 AUTH_USER_MODEL = 'api.User'
+
+# Swagger
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,  # ปิดการใช้งาน Django Login
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'SECURITY': [
+        {
+            'Bearer': []
+        }
+    ]
+}
