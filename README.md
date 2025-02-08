@@ -1,1 +1,1 @@
-# DekEnd-Project-with-Django-NextJS-Supabase
+# DekEnd-Backend-with-Django
